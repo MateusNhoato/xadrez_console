@@ -36,6 +36,10 @@ namespace tabuleiro
             QteMovimentos++;
         }
 
+        public void decrementarQteMovimentos()
+        { 
+            QteMovimentos--;
+        }
         public bool podeMoverPara(Posicao pos)
         {
             return movimentosPossiveis()[pos.Linha, pos.Coluna];
