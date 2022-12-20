@@ -24,17 +24,14 @@ namespace xadrez_console
                         Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
                         partida.validarPosicaoDeOrigem(origem);
 
-                        bool[,] posicoesPossveis = partida.tab.peca(origem).movimentosPossiveis();
+                        bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
                         Console.Clear();
-                        Tela.imprimirTabuleiro(partida.tab, posicoesPossveis);
+                        Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
 
 
                         Console.Write("\nDestino: ");
                         Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
                         partida.validarPosicaoDeDestino(origem, destino);
-
-
-
 
                         partida.realizaJogada(origem, destino);
 
@@ -44,9 +41,9 @@ namespace xadrez_console
                         Console.WriteLine(ex.Message);
                         Console.ReadLine();
                     }
-
-
                 }
+                Console.Clear();
+                Tela.imprimirPartida(partida);
             }
             catch(TabuleiroException ex) 
             {
