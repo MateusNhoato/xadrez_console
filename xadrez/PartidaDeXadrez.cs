@@ -37,6 +37,27 @@ namespace xadrez
             {
                 capturadas.Add(pecaCapturada);
             }
+
+            // #jogadaespecial roque pequeno
+            if(peca is Rei && destino.Coluna == origem.Coluna +2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna +3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = tab.retirarPeca(origemTorre);
+                torre.incrementarQteMovimentos();
+                tab.colocarPeca(torre, destinoTorre);
+            }
+
+            // #jogadaespecial roque grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = tab.retirarPeca(origemTorre);
+                torre.incrementarQteMovimentos();
+                tab.colocarPeca(torre, destinoTorre);
+            }
+
             return pecaCapturada;
         }
 
@@ -53,14 +74,34 @@ namespace xadrez
         
         public void desfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
-            Peca p = tab.retirarPeca(destino);
-            p.decrementarQteMovimentos();
+            Peca peca = tab.retirarPeca(destino);
+            peca.decrementarQteMovimentos();
             if(pecaCapturada != null)
             {
                 tab.colocarPeca(pecaCapturada, destino);
                 capturadas.Remove(pecaCapturada);
             }
-            tab.colocarPeca(p, origem);
+            tab.colocarPeca(peca, origem);
+
+            // #jogadaespecial roque pequeno
+            if (peca is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = tab.retirarPeca(destinoTorre);
+                torre.decrementarQteMovimentos();
+                tab.colocarPeca(torre, origemTorre);
+            }
+
+            // #jogadaespecial roque grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = tab.retirarPeca(destinoTorre);
+                torre.decrementarQteMovimentos();
+                tab.colocarPeca(torre, origemTorre);
+            }
         }
         
         
@@ -214,12 +255,12 @@ namespace xadrez
             colocarNovaPeca('g', 2, new Peao(tab, Cor.Branca));
             colocarNovaPeca('h', 2, new Peao(tab, Cor.Branca));
             colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));
-            colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Branca));
-            colocarNovaPeca('c', 1, new Bispo(tab, Cor.Branca));
-            colocarNovaPeca('d', 1, new Dama(tab, Cor.Branca));
-            colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca));
-            colocarNovaPeca('f', 1, new Bispo(tab, Cor.Branca));
-            colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Branca));
+            //colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Branca));
+            //colocarNovaPeca('c', 1, new Bispo(tab, Cor.Branca));
+            //colocarNovaPeca('d', 1, new Dama(tab, Cor.Branca));
+            colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca, this));
+            //colocarNovaPeca('f', 1, new Bispo(tab, Cor.Branca));
+            //colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Branca));
             colocarNovaPeca('h', 1, new Torre(tab, Cor.Branca));
 
             colocarNovaPeca('a', 7, new Peao(tab, Cor.Preta));
@@ -234,7 +275,7 @@ namespace xadrez
             colocarNovaPeca('b', 8, new Cavalo(tab, Cor.Preta));
             colocarNovaPeca('c', 8, new Bispo(tab, Cor.Preta));
             colocarNovaPeca('d', 8, new Dama(tab, Cor.Preta));
-            colocarNovaPeca('e', 8, new Rei(tab, Cor.Preta));
+            colocarNovaPeca('e', 8, new Rei(tab, Cor.Preta, this));
             colocarNovaPeca('f', 8, new Bispo(tab, Cor.Preta));
             colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Preta));
             colocarNovaPeca('h', 8, new Torre(tab, Cor.Preta));
