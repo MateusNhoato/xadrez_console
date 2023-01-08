@@ -32,6 +32,7 @@ Assim como no xadrez tradicional, as peças brancas começam e o turnos se alter
 
 ### Fazendo uma jogada
 Para se fazer uma jogada, primeiro você escolhe a linha e a coluna onde a peça que quer mexer se encontra. As linhas vão de 1 até 8, e as colunas de a até h.
+
 ![EsquemaBoard](https://www.regencychess.co.uk/blog/wp-content/uploads/2012/05/starting-positon-algebraic.jpg)
 
 Após a seleção da peça, todas as jogadas disponíveis para dita peça ficam destacadas e então basta só escolher.
